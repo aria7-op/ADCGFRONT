@@ -3,7 +3,7 @@
 
 // Gateway configuration
 const API_GATEWAY = {
-  BASE_URL: 'http://localhost:4000',
+  BASE_URL: 'http://192.168.0.7:4000',
   API_PREFIX: '/api/v1',
   HEALTH_CHECK: '/health',
   METRICS: '/metrics'

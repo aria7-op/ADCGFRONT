@@ -273,7 +273,7 @@ function Dashboard() {
           <div className="p-6 border-b border-gray-100">
             <div className="flex justify-between items-center">
               <h4 className="text-lg font-bold text-gray-800">Todos</h4>
-              <a href="#" className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700">
+              <a href="#" className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-secondary-400">
                 View All
               </a>
             </div>
@@ -288,7 +288,7 @@ function Dashboard() {
                 placeholder="Add Todo list"
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="bg-blue-600 text-white px-2 py-1.5 sm:px-6 sm:py-2 rounded-lg font-semibold hover:bg-blue-700 text-sm sm:text-base">
+              <button className="bg-primary text-white px-2 py-1.5 sm:px-6 sm:py-2 rounded-lg font-semibold hover:bg-secondary-400 text-sm sm:text-base">
                 Add
               </button>
             </div>
@@ -397,7 +397,7 @@ function Dashboard() {
               />
             </div>
             <div>
-              <button className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-secondary-400 transition-colors">
                 Filter
               </button>
             </div>

@@ -255,7 +255,7 @@ function MainLayout({ children }) {
       {/* Main Wrapper */}
       <div className="main-wrapper">
                  {/* Top Navigation Bar */}
-                                       <nav className={`absolute top-0 ${isMobile ? 'left-0' : (sidebarCollapsed ? 'left-16' : 'left-64')} right-0 h-16 flex items-center justify-between px-2 sm:px-4 z-50 bg-gradient-to-l from-[#0c415c] to-[#ff7a22] rounded-lg transition-all duration-300`}>
+                                       <nav className={`absolute top-0 ${isMobile ? 'left-0' : (sidebarCollapsed ? 'left-16' : 'left-64')} right-0 h-16 flex items-center justify-between px-2 sm:px-4 z-50 bg-gradient-to-l from-primary to-secondary-400 rounded-lg transition-all duration-300`}>
             {/* Left side - Menu and title */}
             <div className="flex items-center space-x-2 sm:space-x-4">
               <button 

@@ -44,8 +44,8 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           onClick={onClick}
           className={`w-full flex items-center justify-center p-3 text-left rounded-lg transition-colors ${
             isActive 
-              ? 'bg-blue-50 text-blue-600' 
-              : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+              ? 'bg-white/10 text-white' 
+              : 'text-white hover:bg-white/10 hover:text-white'
           }`}
           title={text}
         >
@@ -59,8 +59,8 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
         onClick={onClick}
         className={`w-full flex items-center ${hasDropdown ? 'justify-between' : 'space-x-3'} p-2 text-left rounded-lg transition-colors ${
           isActive 
-            ? 'bg-blue-50 text-blue-600' 
-            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+            ? 'bg-white/10 text-white' 
+            : 'text-white hover:bg-white/10 hover:text-white'
         }`}
       >
         <div className="flex items-center space-x-3">
@@ -68,14 +68,14 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           <span>{text}</span>
         </div>
         {hasDropdown && (
-          <i className={`fas fa-chevron-down text-sm transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}></i>
+          <i className={`fas fa-chevron-down text-sm text-white transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}></i>
         )}
       </button>
     );
   };
 
   return (
-    <aside className={`fixed top-0 left-0 ${isMobile ? 'w-64' : (collapsed ? 'w-16' : 'w-64')} h-full bg-white shadow-lg z-40 overflow-y-auto transition-all duration-300 ${
+    <aside className={`fixed top-0 left-0 ${isMobile ? 'w-64' : (collapsed ? 'w-16' : 'w-64')} h-full bg-primary text-white shadow-lg z-40 overflow-y-auto transition-all duration-300 ${
       isMobile ? 'scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400' :
       (collapsed 
         ? 'scrollbar-none' 
@@ -90,7 +90,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
         <div className="flex items-center space-x-3">
           <img src="/favicon.png" alt="Task Hub" className="h-10" />
           {(!collapsed || isMobile) && (
-            <span className="text-2xl font-bold bg-gradient-to-r from-[#0c415c] to-[#ff7a22] bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-white">
               ADCG
             </span>
           )}
@@ -99,13 +99,13 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
 
       {/* Workspace Selector */}
       {(!collapsed || isMobile) && (
-        <div className="p-4 border-b-2 border-orange-500">
+        <div className="p-4 border-b-2 border-white/20">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <i className="fas fa-check text-green-500"></i>
-              <span className="font-semibold">Workspace 1</span>
+              <i className="fas fa-check text-white"></i>
+              <span className="font-semibold text-white">Workspace 1</span>
             </div>
-            <button className="text-gray-500 hover:text-gray-700">
+            <button className="text-white hover:text-white/80">
               <i className="fas fa-chevron-down"></i>
             </button>
           </div>
@@ -131,7 +131,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
         <ul className="space-y-1">
           <li>
             {renderNavItem(
-              <i className="fas fa-tachometer-alt text-blue-500"></i>,
+              <i className="fas fa-tachometer-alt text-white"></i>,
               'Dashboard',
               () => handleTabClick('dashboard'),
               activeTab === 'dashboard'
@@ -139,7 +139,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-file-contract text-blue-500"></i>,
+              <i className="fas fa-file-contract text-white"></i>,
               'Statuses',
               () => handleTabClick('statuses'),
               activeTab === 'statuses'
@@ -147,7 +147,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-project-diagram text-purple-500"></i>,
+              <i className="fas fa-project-diagram text-white"></i>,
               'Projects',
               handleProjectsClick,
               activeTab.startsWith('projects'),
@@ -163,11 +163,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                      onClick={() => handleProjectSubItemClick('all')}
                      className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                        activeTab === 'projects-all' 
-                         ? 'bg-blue-100 text-blue-700' 
-                         : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                         ? 'bg-white/10 text-white' 
+                         : 'text-white hover:bg-white/10 hover:text-white'
                      }`}
                    >
-                     <i className="fas fa-project-diagram text-purple-500"></i>
+                     <i className="fas fa-project-diagram text-white"></i>
                      <span>Projects</span>
                    </button>
                  </li>
@@ -176,11 +176,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                      onClick={() => handleProjectSubItemClick('favorite')}
                      className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                        activeTab === 'projects-favorite' 
-                         ? 'bg-blue-100 text-blue-700' 
-                         : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                         ? 'bg-white/10 text-white' 
+                         : 'text-white hover:bg-white/10 hover:text-white'
                      }`}
                    >
-                     <i className="fas fa-heart text-red-500"></i>
+                     <i className="fas fa-heart text-white"></i>
                      <span>Favorite Projects</span>
                    </button>
                  </li>
@@ -189,11 +189,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                      onClick={() => handleProjectSubItemClick('calendar')}
                      className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                        activeTab === 'projects-calendar' 
-                         ? 'bg-blue-100 text-blue-700' 
-                         : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                         ? 'bg-white/10 text-white' 
+                         : 'text-white hover:bg-white/10 hover:text-white'
                      }`}
                    >
-                     <i className="fas fa-calendar-alt text-blue-500"></i>
+                     <i className="fas fa-calendar-alt text-white"></i>
                      <span>Calendar View</span>
                    </button>
                  </li>
@@ -202,11 +202,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                      onClick={() => handleProjectSubItemClick('gantt')}
                      className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                        activeTab === 'projects-gantt' 
-                         ? 'bg-blue-100 text-blue-700' 
-                         : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                         ? 'bg-white/10 text-white' 
+                         : 'text-white hover:bg-white/10 hover:text-white'
                      }`}
                    >
-                     <i className="fas fa-chart-bar text-green-500"></i>
+                     <i className="fas fa-chart-bar text-white"></i>
                      <span>Gantt Chart</span>
                    </button>
                  </li>
@@ -215,11 +215,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                      onClick={() => handleProjectSubItemClick('bulk')}
                      className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                        activeTab === 'projects-bulk' 
-                         ? 'bg-blue-100 text-blue-700' 
-                         : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                         ? 'bg-white/10 text-white' 
+                         : 'text-white hover:bg-white/10 hover:text-white'
                      }`}
                    >
-                     <i className="fas fa-upload text-orange-500"></i>
+                     <i className="fas fa-upload text-white"></i>
                      <span>Bulk Upload</span>
                    </button>
                  </li>
@@ -228,7 +228,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-tasks text-green-500"></i>,
+              <i className="fas fa-tasks text-white"></i>,
               'Tasks',
               () => handleTabClick('tasks'),
               activeTab === 'tasks'
@@ -236,7 +236,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-tty text-red-500"></i>,
+              <i className="fas fa-tty text-white"></i>,
               'Leads',
               () => handleTabClick('leads'),
               activeTab === 'leads'
@@ -244,7 +244,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-receipt text-green-500"></i>,
+              <i className="fas fa-receipt text-white"></i>,
               'Payslip',
               () => handleTabClick('payslip'),
               activeTab === 'payslip'
@@ -252,7 +252,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-calendar text-red-500"></i>,
+              <i className="fas fa-calendar text-white"></i>,
               'Meetings',
               () => handleTabClick('meetings'),
               activeTab === 'meetings'
@@ -260,7 +260,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-calendar-alt text-blue-500"></i>,
+              <i className="fas fa-calendar-alt text-white"></i>,
               'Calendar',
               () => handleTabClick('calendar'),
               activeTab === 'calendar'
@@ -268,7 +268,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-comments text-blue-500"></i>,
+              <i className="fas fa-comments text-white"></i>,
               'Chat',
               () => handleTabClick('chat'),
               activeTab === 'chat'
@@ -276,7 +276,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-dollar-sign text-green-500"></i>,
+              <i className="fas fa-dollar-sign text-white"></i>,
               'Finance',
               handleFinanceClick,
               activeTab.startsWith('finance'),
@@ -292,11 +292,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleFinanceSubItemClick('expenses')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'finance-expenses' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-receipt text-red-500"></i>
+                    <i className="fas fa-receipt text-white"></i>
                     <span>Expenses</span>
                   </button>
                 </li>
@@ -305,11 +305,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleFinanceSubItemClick('estimates')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'finance-estimates' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-calculator text-blue-500"></i>
+                    <i className="fas fa-calculator text-white"></i>
                     <span>Estimates</span>
                   </button>
                 </li>
@@ -318,11 +318,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleFinanceSubItemClick('invoices')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'finance-invoices' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-file-invoice text-green-500"></i>
+                    <i className="fas fa-file-invoice text-white"></i>
                     <span>Invoices</span>
                   </button>
                 </li>
@@ -331,11 +331,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleFinanceSubItemClick('items')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'finance-items' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-box text-purple-500"></i>
+                    <i className="fas fa-box text-white"></i>
                     <span>Items</span>
                   </button>
                 </li>
@@ -344,11 +344,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleFinanceSubItemClick('payments')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'finance-payments' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-credit-card text-orange-500"></i>
+                    <i className="fas fa-credit-card text-white"></i>
                     <span>Payments</span>
                   </button>
                 </li>
@@ -357,7 +357,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-user text-yellow-500"></i>,
+              <i className="fas fa-user text-white"></i>,
               'Users',
               () => handleTabClick('users'),
               activeTab === 'users'
@@ -365,7 +365,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-users text-blue-500"></i>,
+              <i className="fas fa-users text-white"></i>,
               'Clients',
               () => handleTabClick('clients'),
               activeTab === 'clients'
@@ -373,7 +373,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-book text-purple-500"></i>,
+              <i className="fas fa-book text-white"></i>,
               'Knowledge Base',
               () => handleTabClick('knowledgebase'),
               activeTab === 'knowledgebase'
@@ -381,7 +381,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-file-contract text-blue-500"></i>,
+              <i className="fas fa-file-contract text-white"></i>,
               'Contracts',
               () => handleTabClick('contracts'),
               activeTab === 'contracts'
@@ -389,7 +389,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-chart-line text-yellow-500"></i>,
+              <i className="fas fa-chart-line text-white"></i>,
               'Activity Logs',
               () => handleTabClick('activitylogs'),
               activeTab === 'activitylogs'
@@ -397,7 +397,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-calendar-check text-green-500"></i>,
+              <i className="fas fa-calendar-check text-white"></i>,
               'Leave Request',
               () => handleTabClick('leaverequest'),
               activeTab === 'leaverequest'
@@ -405,7 +405,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-clock text-orange-500"></i>,
+              <i className="fas fa-clock text-white"></i>,
               'Time Tracker',
               () => handleTabClick('timetracker'),
               activeTab === 'timetracker'
@@ -413,7 +413,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-clipboard-list text-red-500"></i>,
+              <i className="fas fa-clipboard-list text-white"></i>,
               'Notes',
               () => handleTabClick('notes'),
               activeTab === 'notes'
@@ -421,7 +421,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-chart-bar text-indigo-500"></i>,
+              <i className="fas fa-chart-bar text-white"></i>,
               'Reports',
               handleReportsClick,
               activeTab.startsWith('reports'),
@@ -437,11 +437,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleReportsSubItemClick('projects')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'reports-projects' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-project-diagram text-purple-500"></i>
+                    <i className="fas fa-project-diagram text-white"></i>
                     <span>Projects Report</span>
                   </button>
                 </li>
@@ -450,11 +450,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleReportsSubItemClick('tasks')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'reports-tasks' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-tasks text-green-500"></i>
+                    <i className="fas fa-tasks text-white"></i>
                     <span>Tasks Report</span>
                   </button>
                 </li>
@@ -463,11 +463,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleReportsSubItemClick('leads')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'reports-leads' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-tty text-red-500"></i>
+                    <i className="fas fa-tty text-white"></i>
                     <span>Leads Report</span>
                   </button>
                 </li>
@@ -476,11 +476,11 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
                     onClick={() => handleReportsSubItemClick('invoices')}
                     className={`w-full flex items-center space-x-3 p-2 text-left rounded-lg transition-colors text-sm ${
                       activeTab === 'reports-invoices' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'bg-white/10 text-white' 
+                        : 'text-white hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <i className="fas fa-file-invoice text-green-500"></i>
+                    <i className="fas fa-file-invoice text-white"></i>
                     <span>Invoices Report</span>
                   </button>
                 </li>
@@ -489,7 +489,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-user-plus text-teal-500"></i>,
+              <i className="fas fa-user-plus text-white"></i>,
               'System Registrations',
               () => handleTabClick('systemregistrations'),
               activeTab === 'systemregistrations'
@@ -497,7 +497,7 @@ function Sidebar({ onTabChange, activeTab, collapsed = false, isMobile = false }
           </li>
           <li>
             {renderNavItem(
-              <i className="fas fa-cog text-gray-500"></i>,
+              <i className="fas fa-cog text-white"></i>,
               'Settings',
               () => handleTabClick('settings'),
               activeTab === 'settings'

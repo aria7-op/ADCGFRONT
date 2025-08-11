@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Tailwind v4 custom theme colors */
+@theme {
+  --color-primary: #102a43;
+  --color-secondary: #123b54;
+  --color-secondary-400: #497497;
+  --color-secondary-800: #0b283a;
+  --color-primary-800: #091a2c;
+}
+
 /* Custom Scrollbar Styles */
 .scrollbar-none {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
