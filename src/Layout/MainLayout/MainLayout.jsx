@@ -37,6 +37,7 @@ import Notifications from '../../features/Notifications/Notifications';
 import SendMail from '../../features/Mail/SendMail';
 import Announcements from '../../features/Announcements/Announcements';
 import Profile from '../../features/Profile/Profile';
+import NetworkTest from '../../components/NetworkTest';
 
 function MainLayout({ children }) {
   const logoutMutation = useLogout();
@@ -245,6 +246,8 @@ function MainLayout({ children }) {
            return <Announcements />;
        case 'profile':
            return <Profile />;
+       case 'networktest':
+           return <NetworkTest />;
        default:
          return children;
     }

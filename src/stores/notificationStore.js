@@ -2,10 +2,11 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { useAuthStore } from './authStore';
 
-// Notification API client
+// Notification API client - Updated to use API Gateway
 const notificationAPI = new (class {
   constructor() {
-    this.baseURL = 'http://192.168.0.7:4006';
+    // Use API Gateway instead of direct service
+    this.baseURL = 'http://192.168.0.7:4000/api/v1/notifications';
     this.retryAttempts = 3;
     this.retryDelay = 1000;
   }
@@ -15,6 +16,9 @@ const notificationAPI = new (class {
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        'X-Client-Type': 'web-app',
+        'X-API-Version': 'v1',
+        'X-Target-Service': 'notification-service',
         ...options.headers
       },
       ...options
@@ -96,6 +100,8 @@ export const useNotificationStore = create(
     realTimeUpdates: true,
     websocket: null,
     toastQueue: [],
+    websocketConnected: false,
+    websocketError: null,
 
     // Actions
     setLoading: (loading) => set({ isLoading: loading }),
@@ -346,34 +352,51 @@ export const useNotificationStore = create(
         get().websocket.close();
       }
 
+      // Use the notification service directly for WebSocket (WebSockets can't go through HTTP API Gateway)
       const ws = new WebSocket('ws://192.168.0.7:4006/ws/notifications');
       
       ws.onopen = () => {
-        console.log('Notification WebSocket connected');
+        console.log('🔔 Notification WebSocket connected');
+        set({ websocketConnected: true, websocketError: null });
+        
         // Send user ID for filtering
-        ws.send(JSON.stringify({
-          type: 'subscribe',
-          userId: useAuthStore.getState().user?.id
-        }));
+        const userId = useAuthStore.getState().user?.id;
+        if (userId) {
+          ws.send(JSON.stringify({
+            type: 'subscribe',
+            userId: userId
+          }));
+        }
       };
 
       ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        get().handleRealTimeUpdate(data);
+        try {
+          const data = JSON.parse(event.data);
+          console.log('📨 Notification WebSocket message received:', data);
+          get().handleRealTimeUpdate(data);
+        } catch (error) {
+          console.error('❌ Error parsing WebSocket message:', error);
+        }
       };
 
       ws.onerror = (error) => {
-        console.error('Notification WebSocket error:', error);
+        console.error('❌ Notification WebSocket error:', error);
+        set({ websocketError: error, websocketConnected: false });
       };
 
-      ws.onclose = () => {
-        console.log('Notification WebSocket disconnected');
-        // Reconnect after 5 seconds
-        setTimeout(() => {
-          if (get().realTimeUpdates) {
-            get().initializeRealTimeUpdates();
-          }
-        }, 5000);
+      ws.onclose = (event) => {
+        console.log(`🔌 Notification WebSocket disconnected - Code: ${event.code}, Reason: ${event.reason}`);
+        set({ websocketConnected: false });
+        
+        // Reconnect after 5 seconds if real-time updates are still enabled
+        if (get().realTimeUpdates) {
+          console.log('🔄 Attempting to reconnect in 5 seconds...');
+          setTimeout(() => {
+            if (get().realTimeUpdates) {
+              get().initializeRealTimeUpdates();
+            }
+          }, 5000);
+        }
       };
 
       set({ websocket: ws });
