@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 10px; padding: 10px 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Authentication Test</h1>
+    
+    <div>
+        <h3>Test Login API</h3>
+        <button onclick="testLoginAPI()">Test Login API</button>
+        <div id="api-result"></div>
+    </div>
+
+    <div>
+        <h3>Test Frontend Login</h3>
+        <button onclick="testFrontendLogin()">Test Frontend Login</button>
+        <div id="frontend-result"></div>
+    </div>
+
+    <div>
+        <h3>Check Local Storage</h3>
+        <button onclick="checkStorage()">Check Storage</button>
+        <div id="storage-result"></div>
+    </div>
+
+    <div>
+        <h3>Clear Storage</h3>
+        <button onclick="clearStorage()">Clear All Storage</button>
+    </div>
+
+    <script>
+        async function testLoginAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = 'Testing API...';
+            
+            try {
+                const response = await fetch('http://localhost:3003/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'superadmin@adcgmis.com',
+                        password: 'SuperAdmin123!'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.token) {
+                    resultDiv.innerHTML = '<div class="success">✅ API Login Successful</div><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                    
+                    // Store token
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('auth-storage', JSON.stringify({
+                        token: data.token,
+                        user: data.user,
+                        isAuthenticated: true
+                    }));
+                    
+                    resultDiv.innerHTML += '<div class="success">✅ Token stored in localStorage</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ API Login Failed</div><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            }
+        }
+
+        async function testFrontendLogin() {
+            const resultDiv = document.getElementById('frontend-result');
+            resultDiv.innerHTML = 'Testing Frontend...';
+            
+            try {
+                // Simulate the frontend login flow
+                const response = await fetch('http://localhost:3003/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'superadmin@adcgmis.com',
+                        password: 'SuperAdmin123!'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.token) {
+                    // Store in the same format as the frontend
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('auth-storage', JSON.stringify({
+                        token: data.token,
+                        user: data.user,
+                        isAuthenticated: true
+                    }));
+                    
+                    resultDiv.innerHTML = '<div class="success">✅ Frontend Login Simulation Successful</div>';
+                    resultDiv.innerHTML += '<div class="success">✅ Now refresh the main app at http://localhost:5173</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Frontend Login Failed</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            }
+        }
+
+        function checkStorage() {
+            const resultDiv = document.getElementById('storage-result');
+            const token = localStorage.getItem('authToken');
+            const authStorage = localStorage.getItem('auth-storage');
+            
+            resultDiv.innerHTML = '<h4>Local Storage Contents:</h4>';
+            resultDiv.innerHTML += '<div><strong>authToken:</strong> ' + (token ? 'Present' : 'Missing') + '</div>';
+            resultDiv.innerHTML += '<div><strong>auth-storage:</strong> ' + (authStorage ? 'Present' : 'Missing') + '</div>';
+            
+            if (authStorage) {
+                try {
+                    const parsed = JSON.parse(authStorage);
+                    resultDiv.innerHTML += '<pre>' + JSON.stringify(parsed, null, 2) + '</pre>';
+                } catch (e) {
+                    resultDiv.innerHTML += '<div class="error">❌ Invalid JSON in auth-storage</div>';
+                }
+            }
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('auth-storage');
+            alert('Storage cleared!');
+        }
+    </script>
+</body>
+</html> 
