@@ -10,10 +10,10 @@ export default defineConfig({
     federation({
       name: 'adcgmis-host',
       remotes: {
-        'attendance-module': 'http://localhost:3003/assets/remoteEntry.js',
-        'finance-module': 'http://localhost:3004/assets/remoteEntry.js',
-        'ai-module': 'http://localhost:3005/assets/remoteEntry.js',
-        'admin-module': 'http://localhost:3006/assets/remoteEntry.js'
+              'attendance-module': 'http://192.168.0.7:4004/assets/remoteEntry.js',
+      'finance-module': 'http://192.168.0.7:4009/assets/remoteEntry.js',
+      'ai-module': 'http://192.168.0.7:4005/assets/remoteEntry.js',
+      'admin-module': 'http://192.168.0.7:4006/assets/remoteEntry.js'
       },
       shared: ['react', 'react-dom', 'react-router-dom']
     })

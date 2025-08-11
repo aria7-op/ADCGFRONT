@@ -5,7 +5,7 @@ import { useAuthStore } from './authStore';
 // Notification API client
 const notificationAPI = new (class {
   constructor() {
-    this.baseURL = 'http://localhost:3006';
+    this.baseURL = 'http://192.168.0.7:4006';
     this.retryAttempts = 3;
     this.retryDelay = 1000;
   }
@@ -346,7 +346,7 @@ export const useNotificationStore = create(
         get().websocket.close();
       }
 
-      const ws = new WebSocket('ws://localhost:3006/ws/notifications');
+      const ws = new WebSocket('ws://192.168.0.7:4006/ws/notifications');
       
       ws.onopen = () => {
         console.log('Notification WebSocket connected');

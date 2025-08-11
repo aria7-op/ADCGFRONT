@@ -367,7 +367,7 @@ export const useTaskStore = create(
         get().websocket.close();
       }
 
-      const ws = new WebSocket('ws://localhost:4008/ws/tasks');
+      const ws = new WebSocket('ws://192.168.0.7:4008/ws/tasks');
       
       ws.onopen = () => {
         console.log('Task WebSocket connected');
